@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())  # read local .env file
 
 app = Flask(__name__)
-openai.api_key = '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'
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 def get_completion(prompt, model="gpt-3.5-turbo", langchain=None):
     messages = [{"role": "user", "content": prompt}]
