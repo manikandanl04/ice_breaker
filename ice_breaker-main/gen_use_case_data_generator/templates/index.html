@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gen AI - Synthetic Data Generator</title>
+    <link rel="stylesheet" href="C:\Users\mloganathan\Documents\My Local\FI\Front End\static\styles.css">
+    <script>
+        function addColumn() {
+            var columnRow = document.createElement("div");
+            columnRow.classList.add("column-row");
+
+            var columnInput = document.createElement("input");
+            columnInput.setAttribute("type", "text");
+            columnInput.setAttribute("name", "column_names[]");
+            columnInput.setAttribute("placeholder", "Column Name");
+            columnInput.setAttribute("required", "");
+
+            var dataTypeInput = document.createElement("input");
+            dataTypeInput.setAttribute("type", "text");
+            dataTypeInput.setAttribute("name", "data_types[]");
+            dataTypeInput.setAttribute("placeholder", "Data Type");
+            dataTypeInput.setAttribute("required", "");
+
+            columnRow.appendChild(columnInput);
+            columnRow.appendChild(dataTypeInput);
+
+            var columnDiv = document.getElementById("column_names_div");
+            columnDiv.appendChild(columnRow);
+        }
+
+        function removeColumn() {
+            var columnDiv = document.getElementById("column_names_div");
+            if (columnDiv.childElementCount > 1) {
+                columnDiv.removeChild(columnDiv.lastChild);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Gen AI - Synthetic Data Generator</h1>
+    <form method="post" action="/generate" class="form-container">
+        <label for="table_name">Table Name:</label>
+        <input type="text" name="table_name" id="table_name" required><br><br>
+
+        <label>Column Names and Data Types:</label>
+        <div id="column_names_div">
+            <div class="column-row">
+                <input type="text" name="column_names[]" placeholder="Column Name" required>
+                <input type="text" name="data_types[]" placeholder="Data Type" required>
+            </div>
+        </div>
+        <button type="button" onclick="addColumn()">Add Column</button>
+        <button type="button" onclick="removeColumn()">Remove Column</button><br><br>
+
+        <label for="constraints">Constraints (comma-separated):</label>
+        <input type="text" name="constraints" id="constraints"><br><br>
+
+        <label for="row_limit">Row Limit:</label>
+        <input type="number" name="row_limit" id="row_limit" min="1" value="3" required><br><br>
+
+        <input type="submit" value="Generate" class="submit-btn">
+    </form>
+</body>
+</html>
